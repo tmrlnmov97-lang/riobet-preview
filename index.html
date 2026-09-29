@@ -6696,7 +6696,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 }
 
 /* Разделы в шапке — по образцу 1win: тёмная подложка, крупные вкладки,
-   выбранная залита акцентом, значки залитые. */
+   выбранная залита белым, значки залитые. */
 .hdtabs { display: flex; align-items: center; gap: 4px; flex: none; margin-right: auto;
           height: 48px; padding: 4px; border-radius: 14px; background: var(--wl-bg-chrome); }
 .hdtab { display: inline-flex; align-items: center; gap: 10px; height: 40px; padding: 0 18px 0 14px;
@@ -6706,8 +6706,8 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 .hdtab svg { width: 22px; height: 22px; flex: none; display: block; color: var(--wl-text-dim); transition: color .15s ease; }
 .hdtab:hover { background: var(--wl-bg-hover); }
 .hdtab:hover svg { color: var(--wl-text); }
-.hdtab.is-active, .hdtab.is-active:hover { background: var(--wl-primary); color: var(--wl-on-primary); }
-.hdtab.is-active svg { color: var(--wl-on-primary); }
+.hdtab.is-active, .hdtab.is-active:hover { background: #fff; color: var(--wl-gray-1); }
+.hdtab.is-active svg { color: var(--wl-gray-1); }
 .hdtab.is-off { color: var(--wl-text-off); cursor: default; pointer-events: none; }
 .hdtab.is-off svg { color: var(--wl-text-off); }
 .hdtabs__sep { width: 1px; height: 24px; margin: 0 4px; background: var(--wl-w-12); }
