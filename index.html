@@ -6624,8 +6624,6 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
   background: #191a1c; background-image: none; border: 0;
 }
 .sport::after, .sport::before { display: none !important; }
-/* Оливковая рамка лайв-карточек — наследие WarWin, её здесь уже не было */
-.lc { border: 0; }
 
 /* Карточки бонусов — такими же заглушками, как карточки игр: плоская
    подложка, внутри ничего. Пропорцию держит aspect-ratio — без содержимого
@@ -6647,6 +6645,32 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
   filter: grayscale(1) opacity(.45); cursor: default; pointer-events: none;
 }
 
+
+/* ═══ Карточки игр — как в WarWin: узкий Instrument Sans для названий слотов,
+   Cora для лайв-казино, те же кегли, свечение и рамка. ═══ */
+@font-face { font-family: 'Cora'; src: url(a/cora-bold.woff2) format('woff2'); font-weight: 700; font-display: swap; }
+.game__name {
+  font-family: 'Instrument Sans', sans-serif; font-stretch: 75%; font-variation-settings: 'wdth' 75; font-weight: 700;
+  font-size: 28px; line-height: 24px; text-align: center; text-transform: uppercase; width: 100%;
+  text-shadow: 0 0 4px #00535c, 0 0 20px #000;
+}
+.game__provider {
+  font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: normal;
+  white-space: nowrap; text-shadow: 0 0 4px #000, 0 0 13.7px #000; font-variation-settings: 'wdth' 100;
+}
+.lc__name {
+  font-family: 'Cora', 'Instrument Sans', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 19px; text-align: center; width: 100%;
+  text-shadow: 0 0 4.054px rgba(0,0,0,.8);
+}
+.lc__provider { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 12px; font-variation-settings: 'wdth' 100; }
+.lc { border: 2px solid #494e00; }
+.lc--violet { border-color: #000; }
+@media (max-width: 767px) {
+  .game__name { font-size: 21px; line-height: 17px; }
+  .game__provider, .lc__provider { font-size: 8px; }
+  .lc__name { font-size: 15px; line-height: 15px; }
+}
 </style>
 </head>
 <body>
