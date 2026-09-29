@@ -497,7 +497,7 @@ body.nav-rail .nav-toggle__label { display: none; }
 /* Знак 216x40 из макета, показываем на ступень мельче — 32 в высоту.
    Высоту задаём, ширину считает пропорция: на мобильной слот уже, и
    жёсткие 216 вылезали бы за край. */
-.logo { display: block; width: auto; height: 32px; max-width: 100%; }
+.logo { display: block; width: auto; height: 24px; max-width: 100%; }
 
 .header-desktop {
   display: flex; align-items: center; justify-content: space-between;
@@ -1750,13 +1750,13 @@ body.nav-rail .sidebar.is-expanded .sidebar__inner { overflow: visible; }
      Закреплена сверху, а не приклеена: fixed не участвует в прокрутке
      документа и не едет вместе с ним. Место под неё держит .page. */
   .topbar { position: fixed; left: 0; right: 0; top: 0; height: 62px; gap: 0; padding: 0 var(--wl-sp-4); }
-  .topbar__brand { gap: 0; flex: none; width: 120px; padding-left: 0; }
+  .topbar__brand { gap: 0; flex: none; width: auto; padding-left: 0; }
   /* 903:41863 — логотип 106x40 на x=16. Базовый отступ 20 слева сдвигал
      картинку на 36 и сжимал её до 86 — на мобильной он не нужен.
      Ширину подняли со 106 до 120: в макете знак терялся рядом с кнопками.
      Высота 43 — по пропорции 156:55, иначе contain обрежет по высоте. */
-  .topbar__logo-wrap { width: 120px; height: 43px; padding-left: 0; }
-  .topbar__logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+  .topbar__logo-wrap { width: auto; height: auto; padding-left: 0; }
+  .topbar__logo-wrap img { width: auto; height: 18px; }
   .btn-search { display: none; }
   /* В мобильной шапке только логотип и две кнопки — вкладок Casino/Sports нет */
   .cat-buttons { display: none; }
@@ -4050,7 +4050,7 @@ body.dp-open .wallet__deposit, body.dp-open .wallet__deposit::after { animation:
            font-weight: var(--wl-fw-semibold); font-size: var(--wl-fs-sm); color: var(--wl-text); }
 .gv__cur img { display: block; opacity: .7; }
 .gv__cur:hover { background: var(--wl-bg-hover); }
-.gv__mark { display: block; width: auto; height: 22px; margin-inline: auto;
+.gv__mark { display: block; width: auto; height: 14px; margin-inline: auto;
             object-fit: contain; opacity: .55; }
 .gv__modes { display: flex; gap: var(--wl-sp-1); padding: 3px; background: var(--wl-bg-field); border-radius: var(--wl-r-md); }
 .gv__mode { display: flex; align-items: center; justify-content: center; height: 30px; padding: 0 var(--wl-sp-4);
@@ -6711,7 +6711,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
         <!-- Заглушка вместо знака: логотипа у Рио ещё нет, а прежний
              варвиновский вводил в заблуждение. Габариты те же, 156×55,
              чтобы раскладка шапки не поехала. -->
-        <img class="logo" src="a/0d526d6016.svg" alt="RioBet" width="216" height="40">
+        <img class="logo" src="a/plazmo-logo.svg" alt="PLAZMO" width="182" height="24">
       </div>
     </div>
 
@@ -12777,7 +12777,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
               <span class="gv__curwrap">
                 <button class="gv__cur" type="button" data-opts="USDT|USD|EUR|AZN">USDT<img loading="lazy" decoding="async" src="a/e139209072.svg" alt=""></button>
               </span>
-              <img loading="lazy" decoding="async" class="gv__mark" src="a/0d526d6016.svg" alt="RioBet">
+              <img loading="lazy" decoding="async" class="gv__mark" src="a/plazmo-logo.svg" alt="PLAZMO">
               <div class="gv__modes" role="tablist" aria-label="Game mode">
                 <button class="gv__mode" type="button" role="tab" aria-selected="false">Demo</button>
                 <button class="gv__mode is-active" type="button" role="tab" aria-selected="true">Play</button>
