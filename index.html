@@ -6695,19 +6695,25 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
   .hero__side { flex: 0 0 38%; }
 }
 
-/* Разделы в шапке — в стиле RioBet */
+/* Разделы в шапке — по образцу 1win: тёмная подложка, крупные вкладки,
+   выбранная залита акцентом, значки залитые. */
 .hdtabs { display: flex; align-items: center; gap: 4px; flex: none; margin-right: auto;
-          height: 40px; padding: 4px; border-radius: var(--wl-r-md); background: var(--wl-bg-chrome); }
-.hdtab { display: inline-flex; align-items: center; gap: var(--wl-sp-2); height: 32px; padding: 0 var(--wl-sp-3);
-         border: 0; border-radius: var(--wl-r-sm); background: none; cursor: pointer; white-space: nowrap;
-         font-family: var(--wl-font); font-weight: var(--wl-fw-semibold); font-size: var(--wl-fs-sm);
-         color: var(--wl-text-dim); transition: background-color .15s ease, color .15s ease; }
-.hdtab svg { width: 18px; height: 18px; flex: none; display: block; }
-.hdtab:hover { background: var(--wl-bg-hover); color: var(--wl-text); }
-.hdtab.is-active, .hdtab.is-active:hover { background: var(--wl-bg-pick); box-shadow: inset 0 0 0 1px var(--wl-line-pick); color: var(--wl-text); }
-.hdtab.is-active svg { color: var(--wl-primary); }
+          height: 48px; padding: 4px; border-radius: 14px; background: var(--wl-bg-chrome); }
+.hdtab { display: inline-flex; align-items: center; gap: 10px; height: 40px; padding: 0 18px 0 14px;
+         border: 0; border-radius: 11px; background: none; cursor: pointer; white-space: nowrap;
+         font-family: var(--wl-font); font-weight: var(--wl-fw-semibold); font-size: 15px; line-height: 1;
+         color: var(--wl-text); transition: background-color .15s ease, color .15s ease; }
+.hdtab svg { width: 22px; height: 22px; flex: none; display: block; color: var(--wl-text-dim); transition: color .15s ease; }
+.hdtab:hover { background: var(--wl-bg-hover); }
+.hdtab:hover svg { color: var(--wl-text); }
+.hdtab.is-active, .hdtab.is-active:hover { background: var(--wl-primary); color: var(--wl-on-primary); }
+.hdtab.is-active svg { color: var(--wl-on-primary); }
 .hdtab.is-off { color: var(--wl-text-off); cursor: default; pointer-events: none; }
+.hdtab.is-off svg { color: var(--wl-text-off); }
+.hdtabs__sep { width: 1px; height: 24px; margin: 0 4px; background: var(--wl-w-12); }
 .hdtab:focus-visible { outline: 2px solid var(--wl-focus); outline-offset: 2px; }
+/* Кошелёк не сжимается ради вкладок: это деньги, он важнее */
+.header-desktop .wallet { flex: none; }
 /* Уже 1280 рядом с логотипом и кошельком им места нет — прячем */
 @media (max-width: 1279px) { .hdtabs { display: none; } }
 </style>
@@ -6732,14 +6738,15 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
     </div>
 
     <div class="header-desktop">
-      <!-- Разделы в шапке: Casino, Sport, Bonuses. Оформление RioBet —
-           серая подложка, скругление как у кнопок шапки, выбранная вкладка
-           подсвечена акцентом. Спорт снят с сайта, вкладка погашена. -->
-      <div class="hdtabs" role="group" aria-label="Sections">
-        <button class="hdtab" type="button" data-hdtab="casino" data-fgo="view:casino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M9.2 5v14M14.8 5v14"/></svg><span>Casino</span></button>
-        <button class="hdtab is-off" type="button" data-hdtab="sport" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m12 7.5 4 2.9-1.5 4.6h-5L8 10.4z"/></svg><span>Sport</span></button>
-        <button class="hdtab" type="button" data-hdtab="bonuses" data-fgo="view:bonuses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8" width="17" height="4" rx="1.5"/><path d="M5 12v7.5h14V12M12 8v11.5M12 8c-1.5-3-5-3.5-5-1.2C7 8 9 8 12 8zm0 0c1.5-3 5-3.5 5-1.2C17 8 15 8 12 8z"/></svg><span>Bonuses</span></button>
-      </div>
+      <!-- Разделы в шапке по образцу 1win: Lobby, Casino, разделитель, Sport.
+           Выбранная вкладка — сплошной акцент с тёмным текстом.
+           Страницы спорта в RioBet нет, поэтому Sport погашен. -->
+      <nav class="hdtabs" aria-label="Sections">
+        <button class="hdtab" type="button" data-hdtab="home" data-fgo="view:home"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.7 3.3a1 1 0 0 0-1.4 0l-8 7.2A1 1 0 0 0 4 12.2h1V19a2 2 0 0 0 2 2h3v-5.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1V21h3a2 2 0 0 0 2-2v-6.8h1a1 1 0 0 0 .7-1.7z"/></svg><span>Lobby</span></button>
+        <button class="hdtab" type="button" data-hdtab="casino" data-fgo="view:casino"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.3 1.6a8.5 8.5 0 0 0-3.4 1.2l1.3 2.1a6 6 0 0 1 2.1-.8zm2.6 0v2.5c.8.1 1.5.4 2.1.8l1.3-2.1a8.5 8.5 0 0 0-3.4-1.2zM4.8 7.3a8.5 8.5 0 0 0-1.2 3.4h2.5c.1-.8.4-1.5.8-2.1zm14.4 0-2.1 1.3c.4.6.7 1.3.8 2.1h2.5a8.5 8.5 0 0 0-1.2-3.4zM3.6 13.3a8.5 8.5 0 0 0 1.2 3.4l2.1-1.3a6 6 0 0 1-.8-2.1zm14.3 0a6 6 0 0 1-.8 2.1l2.1 1.3a8.5 8.5 0 0 0 1.2-3.4zM8.6 17.1l-1.3 2.1a8.5 8.5 0 0 0 3.4 1.2v-2.5a6 6 0 0 1-2.1-.8zm6.8 0a6 6 0 0 1-2.1.8v2.5a8.5 8.5 0 0 0 3.4-1.2z"/><path fill="currentColor" d="M12 8.2c1.6 1.5 3.3 2.7 3.3 4.2a1.7 1.7 0 0 1-2.8 1.3l.5 1.9h-2l.5-1.9a1.7 1.7 0 0 1-2.8-1.3c0-1.5 1.7-2.7 3.3-4.2z"/></svg><span>Casino</span></button>
+        <i class="hdtabs__sep" aria-hidden="true"></i>
+        <button class="hdtab is-off" type="button" data-hdtab="sport" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 5.2-3.3 2.4 1.3 3.9h4l1.3-3.9zM12 3.6c-1 0-2 .2-2.9.5l2.9 2.1 2.9-2.1A8.4 8.4 0 0 0 12 3.6zm6.4 2.9-3.3.5-.1.1 1.1 3.4 3.2.7c.1-.4.1-.8.1-1.2 0-1.3-.4-2.5-1-3.5zm-12.8 0a8.4 8.4 0 0 0-1 4.7l3.2-.7 1.1-3.4-.1-.1zm-1 6.3a8.4 8.4 0 0 0 2 3.9l.9-2.8-.9-1.3zm15.8 0-2 .1-.9 1.3.9 2.8a8.4 8.4 0 0 0 2-3.9zM9.6 15.1l-1.7 2.4.9 2.4a8.4 8.4 0 0 0 6.4 0l.9-2.4-1.7-2.4z"/></svg><span>Sport</span></button>
+      </nav>
       <!-- 905:4387 — баланс и пополнение отдельной группой: в макете после
            входа шапка делится на три части, кошелёк стоит между ними -->
       <div class="wallet" data-node-id="905:4387">
