@@ -14444,7 +14444,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
         <img loading="lazy" decoding="async" class="pm__bonus-ico" src="a/3183da3c56.webp" alt="" width="26" height="26">
         <b class="pm__bonus-sum">0</b>
       </div>
-      <button class="pm__swap" type="button" data-pm-go="bonuses">Exchange</button>
+      <button class="pm__swap" type="button" data-pm-go="bonuses" disabled>Exchange</button>
     </div>
     <!-- Состояние отыгрыша. Пока активного бонуса нет, блок скрыт: пустая
          полоса на нуле читалась бы как «бонус есть, но не двигается». -->
@@ -15589,8 +15589,9 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
     /* Отыгранный бонус ещё не обменяли — деньги по-прежнему бонусные, и строка
        не должна обнуляться раньше самого обмена: иначе рядом с нулём висела бы
        кнопка «Обменять 20 000». */
+    var bonusNow = ready ? ready.released : wwWelcome.bonusBalance();
     if (sumEl) {
-      sumEl.textContent = wwCur.text(ready ? ready.released : wwWelcome.bonusBalance());
+      sumEl.textContent = wwCur.text(bonusNow);
     }
 
     var cur = wwWelcome.C.CUR;
@@ -15605,14 +15606,16 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
        отыгрыш закрыт — оживает и показывает сумму, которую переведёт. */
     var swap = document.querySelector('.pm__swap');
     if (swap) {
-      swap.disabled = !!b && !done;
+      /* На нуле обменивать нечего — кнопка выключена, как и во время отыгрыша */
+      var empty = !(bonusNow > 0);
+      swap.disabled = (!!b && !done) || empty;
       swap.dataset.claim = done ? '1' : '';
       /* Подпись одна на все состояния: сумма и так стоит строкой ниже, а на
          кнопке она растягивала её и ломала число бонуса на две строки. */
       swap.textContent = T('Exchange');
       swap.title = (b && !done)
         ? T('Available after the wagering is complete')
-        : '';
+        : empty ? T('No bonus funds to exchange') : '';
     }
 
     /* Отыгранный и ещё не забранный бонус важнее идущего: это готовые деньги,
