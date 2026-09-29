@@ -1,0 +1,11 @@
+<svg style="color:#BBC6CD" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+<g transform="translate(2 2)">
+<circle cx="10" cy="2.3" r="2.3" fill="currentColor"/>
+<circle cx="10" cy="8.2" r="1.35" fill="currentColor"/>
+<circle cx="6" cy="12.6" r="1.35" fill="currentColor"/>
+<circle cx="14" cy="12.6" r="1.35" fill="currentColor"/>
+<circle cx="2.1" cy="17" r="1.35" fill="currentColor"/>
+<circle cx="10" cy="17" r="1.35" fill="currentColor"/>
+<circle cx="17.9" cy="17" r="1.35" fill="currentColor"/>
+</g>
+</svg>
