@@ -6686,6 +6686,14 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 .art-info .game__name { font-size: 28px; line-height: 24px; }
 .art-info .game__provider, .art-info .lc__provider { font-size: 12px; }
 .art-info .lc__name { font-size: 18px; line-height: 19px; }
+
+/* Главный баннер короче и чуть выше: раньше он держал пропорцию 1474:476
+   и на широком экране вытягивался в длинную тонкую полосу. Теперь высота
+   своя, а карточки справа забирают больше ширины. */
+@media (min-width: 1024px) {
+  .hero__banner { aspect-ratio: auto !important; height: 264px; }
+  .hero__side { flex: 0 0 38%; }
+}
 </style>
 </head>
 <body>
