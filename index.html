@@ -74,10 +74,10 @@
   /* ---------- Акцент по прозрачности ----------
      Было 8 ступеней, стало 4. Идут за основным цветом: иначе выбранные
      вкладки и чипы остались бы синими рядом с янтарными кнопками. */
-  --wl-a-10:  rgba(104, 225, 181, .10);
-  --wl-a-18:  rgba(104, 225, 181, .18);
-  --wl-a-30:  rgba(104, 225, 181, .30);
-  --wl-a-55:  rgba(104, 225, 181, .55);
+  --wl-a-10:  rgba(255, 153, 0, .10);
+  --wl-a-18:  rgba(255, 153, 0, .18);
+  --wl-a-30:  rgba(255, 153, 0, .30);
+  --wl-a-55:  rgba(255, 153, 0, .55);
 
 
   /* ==========================================================
@@ -124,18 +124,18 @@
      Сплошной --wl-primary — это верхняя точка градиента. Им красится всё,
      что заливкой быть не может: метки, канты, полосы в 2px, текст. Градиент
      идёт только на крупные заливки — главные кнопки. */
-  --wl-primary:        #68e1b5;  /* верх градиента */
-  --wl-primary-hover:  #84e9c4;  /* светлее на 12% */
-  --wl-primary-active: #4ec79a;  /* темнее на 12% */
-  --wl-grad-primary:        linear-gradient(180deg, #68e1b5 0%, #1a3d34 100%);
-  --wl-grad-primary-hover:  linear-gradient(180deg, #7ce8c1 0%, #234e43 100%);
-  --wl-grad-primary-active: linear-gradient(180deg, #55cda2 0%, #142e28 100%);
+  --wl-primary:        #ff9900;  /* верх градиента */
+  --wl-primary-hover:  #ffad33;  /* светлее на 12% */
+  --wl-primary-active: #d97f00;  /* темнее на 12% */
+  --wl-grad-primary:        linear-gradient(180deg, #ff9900, #ff9900);
+  --wl-grad-primary-hover:  linear-gradient(180deg, #ffad33, #ffad33);
+  --wl-grad-primary-active: linear-gradient(180deg, #d97f00, #d97f00);
   /* Текст на активной заливке — тёмный. Ни один цвет не держит 4.5 по всей
      высоте градиента: наверху он светлый, внизу тёмный. По полосе, где реально
      стоит подпись, тёмный даёт от 3.1 до 7.5 против 2.6…6.2 у белого.
      У выключенных кнопок свой приглушённый цвет, их это не касается. */
   --wl-on-primary:     #0e1011;
-  --wl-focus:          #9af0d2;
+  --wl-focus:          #ffc56b;
 
   /* ---------- Успех: регистрация, «выполнено», Live, выигрыш ----------
      Было 7 зелёных, стало 3 плюс прозрачности. */
@@ -169,11 +169,11 @@
      и два разных зелёных рядом читались как ошибка, а не как смысл. Токены
      оставлены — по ним красится «Пополнить», отправка в кассе, кнопки
      состояний и полоса баланса в профиле. */
-  --wl-money-a:     #68e1b5;  /* верх градиента, он же --wl-primary */
-  --wl-money-b:     #1a3d34;  /* низ градиента */
+  --wl-money-a:     #ff9900;  /* верх градиента, он же --wl-primary */
+  --wl-money-b:     #ff9900;  /* низ градиента */
   --wl-money-ink:   #0e1011;  /* текст на заливке */
-  --wl-money-hi:    #68e1b5;  /* «максимум» и сумма в депозите */
-  --wl-money-glow:  rgba(104, 225, 181, .22);
+  --wl-money-hi:    #ff9900;  /* «максимум» и сумма в депозите */
+  --wl-money-glow:  rgba(255, 153, 0, .22);
   --wl-money-grad:  linear-gradient(180deg, var(--wl-money-a), var(--wl-money-b));
 
   /* ---------- VIP: цвет ранга ---------- */
@@ -670,9 +670,9 @@ body.nav-rail .sidebar__rule { margin: var(--wl-sp-2) var(--wl-sp-2) var(--wl-sp
 .side-item--active {
   /* Свет был синим, от прежней темы. Рисунок тот же, тон — акцентный. */
   background-image: linear-gradient(90deg,
-    rgba(104, 225, 181, 0) 0%,
-    rgba(104, 225, 181, .16) 55%,
-    rgba(104, 225, 181, .26) 100%);
+    rgba(255, 153, 0, 0) 0%,
+    rgba(255, 153, 0, .16) 55%,
+    rgba(255, 153, 0, .26) 100%);
 }
 .side-item .chev {
   width: 20px; height: 20px; display: block; flex: none; object-fit: none;
@@ -990,7 +990,7 @@ body.nav-rail .sidebar.is-expanded .sidebar__inner { overflow: visible; }
 .footer::before { content: ''; position: absolute; left: 50%; top: -70px; z-index: 0;
                   width: 720px; height: 140px; transform: translateX(-50%);
                   background: radial-gradient(50% 50% at 50% 50%,
-                              var(--wl-a-18) 0%, rgba(104, 225, 181, 0) 100%);
+                              var(--wl-a-18) 0%, rgba(255, 153, 0, 0) 100%);
                   pointer-events: none; }
 .footer > * { position: relative; z-index: 1; }
 /* ── Навигация футера: пять колонок разделов над юридическим блоком.
@@ -2902,7 +2902,7 @@ body.nav-rail .sidebar.is-expanded .sidebar__inner { overflow: visible; }
   display: flex; align-items: center; justify-content: center; padding: var(--wl-sp-3) var(--wl-sp-5);
   background-color: var(--wl-primary); background-image: var(--wl-grad-primary); background-origin: border-box;
   border: 0; border-radius: var(--wl-r-sm); cursor: pointer;
-  filter: drop-shadow(0 0 4.4px rgba(104, 225, 181, .25));
+  filter: drop-shadow(0 0 4.4px rgba(255, 153, 0, .25));
   font-family: var(--wl-font-ui); font-weight: var(--wl-fw-bold);
   font-size: var(--wl-fs-sm); line-height: var(--wl-lh-sm); color: var(--wl-on-primary);
 }
@@ -4561,8 +4561,8 @@ body.dp-open .wallet__deposit { box-shadow: 0 0 0 2px var(--wl-money-glow),
 .dp__switches { width: 100%; padding-top: var(--wl-sp-5); display: flex; flex-direction: column; gap: var(--wl-sp-4); }
 /* 1180:32124 — сегменты Deposit/Withdraw на своём градиенте */
 .dp__seg { display: flex; width: 100%; height: 40px; overflow: hidden; border-radius: var(--wl-r-md);
-           background-image: linear-gradient(121.74deg, rgba(104, 225, 181, .12) 0%,
-                                                        rgba(104, 225, 181, .04) 100%); }
+           background-image: linear-gradient(121.74deg, rgba(255, 153, 0, .12) 0%,
+                                                        rgba(255, 153, 0, .04) 100%); }
 .dp__seg-btn {
   flex: 1 0 0; min-width: 0; display: flex; align-items: center; justify-content: center;
   padding: var(--wl-sp-3) var(--wl-sp-8); background: none; border: 0; cursor: pointer;
