@@ -6671,6 +6671,21 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
   .game__provider, .lc__provider { font-size: 8px; }
   .lc__name { font-size: 15px; line-height: 15px; }
 }
+
+/* ═══ Карточка — точная копия карточки WarWin 154×204 в любом размере.
+   Слои обложки и подпись расставлены в пикселях под 154×204, поэтому
+   скрипт складывает их в коробки этого размера и масштабирует под
+   настоящую карточку (--k). Пропорция карточки — как в WarWin. ═══ */
+.rail > .game, .rail > .lc { height: auto !important; aspect-ratio: 154.2 / 204; }
+.art, .art-info { position: absolute; left: 50%; top: 50%; width: 154.2px; height: 204px;
+                  transform: translate(-50%, -50%) scale(var(--k, 1)); pointer-events: none; }
+.art-info { z-index: 4; }
+.art > img.layer { position: absolute; display: block; max-width: none; object-fit: cover; pointer-events: none; }
+.art-info .game__info { width: 156.643px; padding: 20px 8px 8px; }
+.art-info .lc__info { width: 156.643px; padding: 20px 8px 12px; }
+.art-info .game__name { font-size: 28px; line-height: 24px; }
+.art-info .game__provider, .art-info .lc__provider { font-size: 12px; }
+.art-info .lc__name { font-size: 18px; line-height: 19px; }
 </style>
 </head>
 <body>
@@ -20452,5 +20467,37 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 </script>
 </html>
 
+
+<script>
+  /* Карточки игр: слои и подпись — в коробки 154×204, масштаб под карточку */
+  (function () {
+    var W = 154.2, H = 204;
+    var ro = 'ResizeObserver' in window ? new ResizeObserver(function (es) {
+      es.forEach(function (e) {
+        var r = e.contentRect; if (!r.width) return;
+        e.target.style.setProperty('--k', Math.max(r.width / W, r.height / H).toFixed(4));
+      });
+    }) : null;
+    var seen = new WeakSet();
+    var box = function (card, cls, nodes) {
+      if (!nodes.length) return;
+      var b = document.createElement('div'); b.className = cls;
+      card.insertBefore(b, nodes[0]);
+      nodes.forEach(function (n) { b.appendChild(n); });
+    };
+    var wrap = function () {
+      document.querySelectorAll('.game:not(.game--flat), .lc').forEach(function (c) {
+        if (seen.has(c)) return; seen.add(c);
+        if (!c.querySelector(':scope > .art')) box(c, 'art', [].slice.call(c.querySelectorAll(':scope > img.layer')));
+        if (!c.querySelector(':scope > .art-info')) box(c, 'art-info', [].slice.call(c.querySelectorAll(':scope > .game__info, :scope > .lc__info')));
+        if (ro) ro.observe(c);
+      });
+    };
+    wrap();
+    var t = 0;
+    new MutationObserver(function () { clearTimeout(t); t = setTimeout(wrap, 50); })
+      .observe(document.body, { childList: true, subtree: true });
+  })();
+</script>
 </body>
 </html>
