@@ -6694,6 +6694,22 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
   .hero__banner { aspect-ratio: auto !important; height: 340px; }
   .hero__side { flex: 0 0 38%; }
 }
+
+/* Разделы в шапке — в стиле RioBet */
+.hdtabs { display: flex; align-items: center; gap: 4px; flex: none; margin-right: auto;
+          height: 40px; padding: 4px; border-radius: var(--wl-r-md); background: var(--wl-bg-chrome); }
+.hdtab { display: inline-flex; align-items: center; gap: var(--wl-sp-2); height: 32px; padding: 0 var(--wl-sp-3);
+         border: 0; border-radius: var(--wl-r-sm); background: none; cursor: pointer; white-space: nowrap;
+         font-family: var(--wl-font); font-weight: var(--wl-fw-semibold); font-size: var(--wl-fs-sm);
+         color: var(--wl-text-dim); transition: background-color .15s ease, color .15s ease; }
+.hdtab svg { width: 18px; height: 18px; flex: none; display: block; }
+.hdtab:hover { background: var(--wl-bg-hover); color: var(--wl-text); }
+.hdtab.is-active, .hdtab.is-active:hover { background: var(--wl-bg-pick); box-shadow: inset 0 0 0 1px var(--wl-line-pick); color: var(--wl-text); }
+.hdtab.is-active svg { color: var(--wl-primary); }
+.hdtab.is-off { color: var(--wl-text-off); cursor: default; pointer-events: none; }
+.hdtab:focus-visible { outline: 2px solid var(--wl-focus); outline-offset: 2px; }
+/* Уже 1280 рядом с логотипом и кошельком им места нет — прячем */
+@media (max-width: 1279px) { .hdtabs { display: none; } }
 </style>
 </head>
 <body>
@@ -6716,6 +6732,14 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
     </div>
 
     <div class="header-desktop">
+      <!-- Разделы в шапке: Casino, Sport, Bonuses. Оформление RioBet —
+           серая подложка, скругление как у кнопок шапки, выбранная вкладка
+           подсвечена акцентом. Спорт снят с сайта, вкладка погашена. -->
+      <div class="hdtabs" role="group" aria-label="Sections">
+        <button class="hdtab" type="button" data-hdtab="casino" data-fgo="view:casino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M9.2 5v14M14.8 5v14"/></svg><span>Casino</span></button>
+        <button class="hdtab is-off" type="button" data-hdtab="sport" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m12 7.5 4 2.9-1.5 4.6h-5L8 10.4z"/></svg><span>Sport</span></button>
+        <button class="hdtab" type="button" data-hdtab="bonuses" data-fgo="view:bonuses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8" width="17" height="4" rx="1.5"/><path d="M5 12v7.5h14V12M12 8v11.5M12 8c-1.5-3-5-3.5-5-1.2C7 8 9 8 12 8zm0 0c1.5-3 5-3.5 5-1.2C17 8 15 8 12 8z"/></svg><span>Bonuses</span></button>
+      </div>
       <!-- 905:4387 — баланс и пополнение отдельной группой: в макете после
            входа шапка делится на три части, кошелёк стоит между ними -->
       <div class="wallet" data-node-id="905:4387">
@@ -20505,6 +20529,23 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
     var t = 0;
     new MutationObserver(function () { clearTimeout(t); t = setTimeout(wrap, 50); })
       .observe(document.body, { childList: true, subtree: true });
+  })();
+</script>
+
+<script>
+  /* Подсветка раздела в шапке. Категория — часть казино. */
+  (function () {
+    var tabs = [].slice.call(document.querySelectorAll('.hdtab'));
+    if (!tabs.length) return;
+    var sync = function (key) {
+      tabs.forEach(function (t) {
+        var k = t.dataset.hdtab;
+        t.classList.toggle('is-active', k === 'casino' ? (key === 'casino' || key === 'category') : k === key);
+      });
+    };
+    document.addEventListener('ww:view', function (e) { sync(e.detail); });
+    var shown = document.querySelector('.view:not([hidden])');
+    sync(shown ? (shown.id || '').replace('view-', '') : 'home');
   })();
 </script>
 </body>
