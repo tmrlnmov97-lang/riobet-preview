@@ -6617,16 +6617,15 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 .hero__side .hcard::before { display: none !important; }
 .hero__banner { aspect-ratio: 1474 / 476; }
 
-/* Карточки игр, лайв-казино и спорта — тем же приёмом: арт и подписи
-   скрыты, остаётся залитый прямоугольник. Плитки провайдеров получают
-   такую же подложку, иначе знаки висели в воздухе. */
-.game > *, .lc > *, .sport > * { display: none !important; }
-.game, .lc, .sport, .provider {
+/* Карточки игр и лайв-казино снова с обложками. Заглушкой остаётся
+   только спорт; плитки провайдеров — на своей подложке. */
+.sport > * { display: none !important; }
+.sport, .provider {
   background: #191a1c; background-image: none; border: 0;
 }
-.game::after,  .game::before,
-.lc::after,    .lc::before,
 .sport::after, .sport::before { display: none !important; }
+/* Оливковая рамка лайв-карточек — наследие WarWin, её здесь уже не было */
+.lc { border: 0; }
 
 /* Карточки бонусов — такими же заглушками, как карточки игр: плоская
    подложка, внутри ничего. Пропорцию держит aspect-ratio — без содержимого
@@ -7206,7 +7205,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 
             <article class="lc">
               <img loading="lazy" decoding="async" class="layer" src="a/a07e2f7cd1.webp" alt="" style="width:417.952px;height:278.566px;left:calc(50% - 46.25px);top:calc(50% - 0.06px);transform:translate(-50%,-50%)">
-              <img loading="lazy" decoding="async" class="layer" src="a/16f36ff5dc.webp" alt="" style="width:191.731px;height:243.351px;left:calc(50% + 2.88px);bottom:-4.07px;transform:translateX(-50%)">
+              <img loading="lazy" decoding="async" class="layer" src="a/16f36ff5dc.webp" alt="" style="width:191.731px;height:243.351px;left:calc(50% + 2.88px);bottom:-2.07px;transform:translateX(-50%);object-position:100% 0">
               <div class="lc__info"><div class="lc__name">MEGA<br>ROULETTE</div><p class="lc__provider">PRAGMATIC PLAY</p></div>
             <span class="card-veil" aria-hidden="true"><span class="card-play"><svg viewBox="0 0 32 32" focusable="false"><path d="M24.91 13.94 13.96 6.44a2.94 2.94 0 0 0-2.61-.16A2.79 2.79 0 0 0 10 8.5v15a2.79 2.79 0 0 0 1.35 2.21 2.94 2.94 0 0 0 2.61-.16l10.95-7.5a2.5 2.5 0 0 0 0-4.11Z"/></svg></span></span></article>
 
@@ -13523,7 +13522,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 
             <article class="lc">
               <img loading="lazy" decoding="async" class="layer" src="a/a07e2f7cd1.webp" alt="" style="width:417.952px;height:278.566px;left:calc(50% - 46.25px);top:calc(50% - 0.06px);transform:translate(-50%,-50%)">
-              <img loading="lazy" decoding="async" class="layer" src="a/16f36ff5dc.webp" alt="" style="width:191.731px;height:243.351px;left:calc(50% + 2.88px);bottom:-4.07px;transform:translateX(-50%)">
+              <img loading="lazy" decoding="async" class="layer" src="a/16f36ff5dc.webp" alt="" style="width:191.731px;height:243.351px;left:calc(50% + 2.88px);bottom:-2.07px;transform:translateX(-50%);object-position:100% 0">
               <div class="lc__info"><div class="lc__name">MEGA<br>ROULETTE</div><p class="lc__provider">PRAGMATIC PLAY</p></div>
             <span class="card-veil" aria-hidden="true"><span class="card-play"><svg viewBox="0 0 32 32" focusable="false"><path d="M24.91 13.94 13.96 6.44a2.94 2.94 0 0 0-2.61-.16A2.79 2.79 0 0 0 10 8.5v15a2.79 2.79 0 0 0 1.35 2.21 2.94 2.94 0 0 0 2.61-.16l10.95-7.5a2.5 2.5 0 0 0 0-4.11Z"/></svg></span></span></article>
 
