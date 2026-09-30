@@ -6691,9 +6691,10 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
    и на широком экране вытягивался в длинную тонкую полосу. Теперь высота
    своя, а карточки справа забирают больше ширины. */
 @media (min-width: 1024px) {
-  .hero__banner { aspect-ratio: 1104 / 372 !important; height: auto; }
+  /* Баннер короче: высота прежняя, ширину забирают карточки справа */
+  .hero__banner { aspect-ratio: auto !important; height: clamp(260px, 19vw, 400px); }
   /* Ширины как в Figma: баннер 1104 и колонка карточек 351 рядом */
-  .hero__side { flex: 0 0 calc((100% - 16px) * 351 / 1455); }
+  .hero__side { flex: 0 0 34%; }
 }
 
 /* Разделы в шапке — по образцу 1win: тёмная подложка, крупные вкладки,
@@ -6762,7 +6763,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 .bsl__btn--main { background: #fff; color: #000; }
 @media (min-width: 1024px) {
   .bsl.bsl--plaza { aspect-ratio: 1104 / 557; }
-  .bsl.bsl--rio { aspect-ratio: 1104 / 372; }
+  .bsl.bsl--rio { aspect-ratio: auto; height: 100%; }
   .bsl--plaza .bsl__txt { --u: calc(100cqw / 1104); }
   .bsl--plaza .bsl__info { left: calc(80 * var(--u)); top: calc(77 * var(--u)); font-size: calc(16 * var(--u)); }
   .bsl--plaza .bsl__title { left: calc(79 * var(--u)); top: calc(100 * var(--u)); font-size: calc(80 * var(--u)); }
@@ -6770,7 +6771,8 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
   .bsl--plaza .bsl__btns { left: calc(80 * var(--u)); top: calc(422 * var(--u)); gap: calc(16 * var(--u)); }
   .bsl--plaza .bsl__btn { width: calc(185 * var(--u)); height: calc(55 * var(--u)); padding: 0; border-radius: calc(16 * var(--u)); font-size: calc(16 * var(--u)); }
   .bsl--plaza .bsl__btn--ghost { border-width: calc(2 * var(--u)); }
-  .bsl--rio .bsl__txt { --u: calc(100cqw / 1104); }
+  /* Раскладка от высоты: баннер уже макета, текст и кнопки размер не теряют */
+  .bsl--rio .bsl__txt { --u: calc(100cqh / 372); }
   .bsl--rio .bsl__info { left: calc(60 * var(--u)); top: calc(38 * var(--u)); font-size: calc(12 * var(--u)); }
   .bsl--rio .bsl__title { left: calc(59 * var(--u)); top: calc(59 * var(--u)); font-size: calc(70 * var(--u)); }
   .bsl--rio .bsl__sub { left: calc(66 * var(--u)); top: calc(205 * var(--u)); font-size: calc(32 * var(--u)); }
