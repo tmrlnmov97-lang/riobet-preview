@@ -6605,7 +6605,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
    Содержимое прячем, а не вырезаем из разметки: карусель, слайды после
    входа и мобильная лента завязаны на эти узлы скриптом. Когда придёт
    свой арт, хватит убрать этот блок. */
-.hero__banner > *,
+.hero__banner > *:not(.bsl),
 .hero__side .hcard > * { display: none !important; }
 .hero__banner,
 .hero__side .hcard {
@@ -6691,7 +6691,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
    и на широком экране вытягивался в длинную тонкую полосу. Теперь высота
    своя, а карточки справа забирают больше ширины. */
 @media (min-width: 1024px) {
-  .hero__banner { aspect-ratio: auto !important; height: 340px; }
+  .hero__banner { aspect-ratio: 1586 / 800 !important; height: auto; }
   .hero__side { flex: 0 0 38%; }
 }
 
@@ -6719,6 +6719,36 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 
 /* У категории несколько сеток — видна одна */
 .category-grid[hidden] { display: none; }
+
+/* ── Слайдер баннеров (Figma 315:4629) ──
+   Баннер 1586×800 показан целиком, поэтому коробка держит его пропорцию:
+   тогда невидимые кнопки ложатся ровно на нарисованные. */
+.bsl { position: relative; width: 100%; aspect-ratio: 1586 / 800; border-radius: inherit; overflow: hidden; }
+.bsl__track { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory;
+              scroll-behavior: smooth; scrollbar-width: none; }
+.bsl__track::-webkit-scrollbar { display: none; }
+.bsl__slide { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: start; }
+.bsl__slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bsl__hot { position: absolute; top: 75.75%; height: 16.25%; padding: 0; border: 0; background: none;
+            border-radius: 4%/8%; cursor: pointer; }
+.bsl__hot--claim { left: 4.04%; width: 25.6%; }
+.bsl__hot--terms { left: 31.15%; width: 17.21%; }
+.bsl__hot--play { left: 4.04%; width: 21.37%; }
+.bsl__hot--terms-s { left: 27.24%; width: 17.21%; }
+.bsl__hot:hover { background: rgba(255, 255, 255, .08); }
+.bsl__hot:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.bsl__dots { position: absolute; right: 3%; top: 7%; display: flex; gap: 6px; }
+.bsl__dots button { width: 16px; height: 4px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+                    background: rgba(240, 238, 234, .35); transition: width .2s ease, background-color .2s ease; }
+.bsl__dots button[aria-selected="true"] { width: 32px; background: #f0eeea; }
+@media (max-width: 767px) { .bsl__dots { top: 7%; bottom: auto; gap: 4px; } .bsl__dots button { width: 8px; } .bsl__dots button[aria-selected="true"] { width: 18px; } }
+
+/* Главный баннер RioBet — слайдер баннеров; высота по пропорции баннера */
+.hero__banner .bsl { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+@media (max-width: 1023px) {
+  .hero__banner, body.is-authed .hero__banner { display: block; height: auto; aspect-ratio: 1586 / 800; }
+  .hero__mslides, .hero__dots { display: none !important; }
+}
 </style>
 </head>
 <body>
@@ -6891,6 +6921,27 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
     <!-- 1126:15053 «Hero» — баннер 737 + колонка карточек 351, зазор 16 -->
     <section class="hero" data-node-id="1126:15053">
       <div class="hero__banner" data-node-id="1118:12299">
+        <!-- Баннеры из Figma (Design QA 315:4629): картинка баннера целиком,
+             поверх нарисованных кнопок — настоящие кнопки-невидимки. -->
+        <div class="bsl" data-bsl aria-roledescription="carousel" aria-label="Promotions">
+          <div class="bsl__track">
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-1.webp" alt="Heat up to 350% — welcome pack" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-zeus.webp" alt="Zeus Fridays — 20 free spins on Gates of Olympus" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-freespins.webp" alt="Welcome free spins for new players" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-referral.webp" alt="Referral program — 5% of friends’ net loss" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-sport.webp" alt="Sport event" width="1586" height="800"><button class="bsl__hot bsl__hot--play" type="button" data-fgo="msg:Sport is coming soon." aria-label="Play now"></button><button class="bsl__hot bsl__hot--terms-s" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-2.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-3.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-4.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-5.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-6.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-7.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-8.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-9.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+            <div class="bsl__slide" role="group" aria-roledescription="slide"><img src="a/pbn-heat-10.webp" alt="Heat up to 350%" width="1586" height="800"><button class="bsl__hot bsl__hot--claim" type="button" data-fgo="auth:reg" aria-label="Claim bonus"></button><button class="bsl__hot bsl__hot--terms" type="button" data-fgo="view:promo" aria-label="Terms"></button></div>
+          </div>
+          <div class="bsl__dots" role="tablist" aria-label="Banners"></div>
+        </div>
         <!-- 1118:12299 — фон баннера выгружен из Figma одним куском -->
         <img class="hero__bg hero__bg--guest" src="a/da81e07337.webp" alt="">
         <img class="hero__bg hero__bg--mob" src="a/82ed8cf07a.webp" alt="" data-node-id="903:41876">
@@ -20866,6 +20917,37 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
     document.addEventListener('ww:view', function (e) { sync(e.detail); });
     var shown = document.querySelector('.view:not([hidden])');
     sync(shown ? (shown.id || '').replace('view-', '') : 'home');
+  })();
+</script>
+
+<script>
+  /* Слайдер баннеров: листается пальцем и колёсиком, сам переключается раз
+     в 6 секунд, на наведении стоит. Точки — по числу баннеров. */
+  (function () {
+    document.querySelectorAll('[data-bsl]').forEach(function (root) {
+      var track = root.querySelector('.bsl__track');
+      var slides = [].slice.call(track.children);
+      var dotsBox = root.querySelector('.bsl__dots');
+      var dots = slides.map(function (s, i) {
+        var d = document.createElement('button');
+        d.type = 'button'; d.setAttribute('role', 'tab'); d.setAttribute('aria-label', 'Banner ' + (i + 1));
+        d.addEventListener('click', function () { go(i); });
+        dotsBox.appendChild(d); return d;
+      });
+      var cur = 0;
+      var paint = function () { dots.forEach(function (d, i) { d.setAttribute('aria-selected', String(i === cur)); }); };
+      var go = function (i) { cur = (i + slides.length) % slides.length; track.scrollTo({ left: cur * track.clientWidth }); paint(); };
+      track.addEventListener('scroll', function () {
+        var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+        if (i !== cur) { cur = i; paint(); }
+      }, { passive: true });
+      paint();
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var hold = false;
+      root.addEventListener('mouseenter', function () { hold = true; });
+      root.addEventListener('mouseleave', function () { hold = false; });
+      setInterval(function () { if (!hold && root.offsetParent !== null && !document.hidden) go(cur + 1); }, 6000);
+    });
   })();
 </script>
 </body>
