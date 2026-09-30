@@ -6692,7 +6692,8 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
    своя, а карточки справа забирают больше ширины. */
 @media (min-width: 1024px) {
   .hero__banner { aspect-ratio: 1104 / 372 !important; height: auto; }
-  .hero__side { flex: 0 0 28%; }
+  /* Ширины как в Figma: баннер 1104 и колонка карточек 351 рядом */
+  .hero__side { flex: 0 0 calc((100% - 16px) * 351 / 1455); }
 }
 
 /* Разделы в шапке — по образцу 1win: тёмная подложка, крупные вкладки,
@@ -6786,15 +6787,15 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
   .hero__mslides, .hero__dots { display: none !important; }
 }
 
-/* Карточки справа от баннера — из Figma (Page 4, Frame 10/11, 351×111): арт
+/* Карточки справа от баннера — из Figma (Page 4, 345:6168, 351×174): арт
    картинкой, подпись и стрелка живым текстом. Размеры — в долях ширины
    карточки, поэтому раскладка та же при любой её высоте. */
-.hero__side .hcard { container-type: size; background: #000; }
+.hero__side .hcard { container-type: size; background: #000; box-shadow: inset 0 0 0 1px #262939; border-radius: 18px; }
 .hero__side .hcard > .hc2__art { display: block !important; position: absolute; inset: 0; width: 100%; height: 100%;
-                                 object-fit: cover; object-position: 100% 0; }
+                                 object-fit: cover; object-position: 100% 40%; }
 .hero__side .hcard > .hc2__txt { display: flex !important; flex-direction: column; align-items: flex-start;
                                  --u: calc(100cqw / 351); gap: calc(13 * var(--u));
-                                 position: absolute; left: calc(20 * var(--u)); top: calc(19 * var(--u)); bottom: calc(19 * var(--u));
+                                 position: absolute; left: calc(19 * var(--u)); top: calc(19 * var(--u)); bottom: calc(19 * var(--u));
                                  justify-content: space-between; z-index: 2; }
 .hc2__title { font-family: 'Archivo', 'Arial Black', sans-serif; font-variation-settings: 'wdth' 125; font-stretch: 125%;
               font-weight: 800; font-size: calc(24 * var(--u)); line-height: 1.2; color: #fff; letter-spacing: -.01em; }
@@ -6802,6 +6803,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
            border-radius: calc(8 * var(--u)); background: rgba(255, 255, 255, .15); color: #fff;
            transition: background-color .15s ease; }
 .hc2__go svg { width: calc(16 * var(--u)); height: calc(16 * var(--u)); display: block; }
+.hero__side .hcard::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px #262939; pointer-events: none; z-index: 3; display: block !important; }
 .hero__side .hcard:hover .hc2__go { background: rgba(255, 255, 255, .28); }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600&family=JetBrains+Mono:wght@400&family=Archivo:wdth,wght@62..125,700..800&display=swap" rel="stylesheet">
@@ -7068,7 +7070,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
       <div class="hero__dots" role="tablist" aria-label="Banners"></div>
       <div class="hero__side" data-node-id="1126:15052">
         <a class="hcard hcard--cas" href="#" data-node-id="1122:15006">
-          <img class="hc2__art" src="a/hc-cas.webp" alt="" width="351" height="141"><span class="hc2__txt"><b class="hc2__title">CASINO</b><span class="hc2__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+          <img class="hc2__art" src="a/hc2-cas.webp" alt="" width="351" height="174"><span class="hc2__txt"><b class="hc2__title">CASINO</b><span class="hc2__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
           <img class="hcard__glow" src="a/91855a6b2e.svg" alt="">
           <img class="hcard__dust" src="a/b73244828f.webp" alt="">
           <span class="hcard__pic"><img src="a/6c5a0c6fd6.webp" alt=""></span>
@@ -7076,7 +7078,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
           <span class="hcard__go"><img src="a/269dba37ff.svg" alt="" width="16" height="16"></span>
         </a>
         <a class="hcard hcard--sport" href="#" data-fgo="msg:Sport is coming soon." data-node-id="1125:15026">
-          <img class="hc2__art" src="a/hc-sport.webp" alt="" width="351" height="141"><span class="hc2__txt"><b class="hc2__title">SPORT</b><span class="hc2__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+          <img class="hc2__art" src="a/hc2-sport.webp" alt="" width="351" height="174"><span class="hc2__txt"><b class="hc2__title">SPORT</b><span class="hc2__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
           <img class="hcard__glow" src="a/4a36cf1975.svg" alt="">
           <img class="hcard__dust" src="a/b73244828f.webp" alt="">
           <span class="hcard__pic"><img src="a/afffb197e4.webp" alt=""></span>
