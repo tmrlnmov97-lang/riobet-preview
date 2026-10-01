@@ -6629,13 +6629,12 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
    подложка, внутри ничего. Пропорцию держит aspect-ratio — без содержимого
    карточка схлопнулась бы в ноль. Селекторы с атрибутом нужны, чтобы
    перебить цветные плашки ступеней: у них специфичность выше голого класса. */
-.bnwp__c > *, .bncard > *, .bnact > * { display: none !important; }
+.bnwp__c > *, .bnact > * { display: none !important; }
 .bnwp__c, .bnwp__c[data-step], .bnwp__c[data-st],
 .bncard, .bncard:hover, .bncard.is-taken, .bnact {
   background: #191a1c; background-image: none; border: 0; box-shadow: none;
 }
 .bnwp__c { aspect-ratio: 216 / 298; height: auto; }
-.bncard  { aspect-ratio: 268 / 308; height: auto; }
 .bnact   { aspect-ratio: 1080 / 314; height: auto; }
 
 /* Пункты снятого раздела: остаются в списке, но не нажимаются.
@@ -6811,6 +6810,19 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
 
 /* Пустая заглушка баннера между рядами на главной — убрана */
 .bonus--ph { display: none !important; }
+
+/* Карточки бонусов — шапка-баннер из Figma (WARWIN 1789:13637 / 13792 / 13874):
+   фото как в макете, название и подпись поверх живым текстом. Низ карточки —
+   в стиле сайта. Размеры шапки — в долях её ширины (макет 355×150). */
+.bncard { height: auto; overflow: hidden; }
+.bncard__hero { position: relative; flex: none; width: 100%; aspect-ratio: 355 / 150; overflow: hidden;
+                container-type: inline-size; background: #000; }
+.bncard__hero .bncard__art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 100% 50%; }
+.bnh__txt { --u: calc(100cqw / 355); position: absolute; left: calc(20 * var(--u)); top: 50%; translate: 0 -55%;
+            display: flex; flex-direction: column; gap: calc(12 * var(--u)); max-width: calc(250 * var(--u)); color: #f0eeea; }
+.bnh__title { font-family: 'Archivo', 'Arial Black', sans-serif; font-variation-settings: 'wdth' 125; font-stretch: 125%;
+              font-weight: 800; font-size: calc(30 * var(--u)); line-height: 1; letter-spacing: -.01em; text-transform: uppercase; }
+.bnh__sub { font-family: 'Onest', system-ui, sans-serif; font-weight: 400; font-size: calc(16 * var(--u)); line-height: 1.25; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600&family=JetBrains+Mono:wght@400&family=Archivo:wdth,wght@62..125,700..800&display=swap" rel="stylesheet">
 </head>
@@ -8331,7 +8343,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
               <h2 class="bnsec__h">Available bonuses</h2>
               <div class="bnp">
               <article class="bncard" data-key="unlock" data-days="30">
-                <img loading="lazy" decoding="async" class="bncard__art" src="a/58c4987a22.webp" alt="" width="354" height="150">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-zeus.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">5% Bonus<br>Unlock</b><span class="bnh__sub">From the 2nd deposit</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Deposit</span><span class="bn__tag">From 2nd deposit</span>
@@ -8345,7 +8357,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                 </div>
               </article>
               <article class="bncard" data-key="invite" data-days="30">
-                <img loading="lazy" decoding="async" class="bncard__art" src="a/a9d50cbbcf.webp" alt="" width="354" height="150">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-ref.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Referal<br>program</b><span class="bnh__sub">5% of invited friend’s net loss for 30 days</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Referral</span><span class="bn__tag">Up to 5 friends</span>
@@ -8359,7 +8371,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                 </div>
               </article>
               <article class="bncard" data-key="cash" data-days="7">
-                <img loading="lazy" decoding="async" class="bncard__art" src="a/391a058436.webp" alt="" width="354" height="150">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-free.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Weekly<br>cashback</b><span class="bnh__sub">Back on your weekly losses</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Cashback</span><span class="bn__tag">Every Monday</span>
@@ -8373,6 +8385,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                 </div>
               </article>
               <article class="bncard" data-key="welcome" data-days="3">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-free.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Welcome<br>freespins</b><span class="bnh__sub">For new players</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Casino</span><span class="bn__tag">Active for registration</span>
@@ -8386,6 +8399,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                 </div>
               </article>
               <article class="bncard" data-key="zeus" data-days="7">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-zeus.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Zeus<br>Fridays</b><span class="bnh__sub">Get 20 FS on Gates of Olympus</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Casino</span><span class="bn__tag">Every Friday &middot; UTC</span>
@@ -8399,6 +8413,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                 </div>
               </article>
               <article class="bncard" data-key="deposit" data-days="30">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-ref.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Deposit<br>bonus</b><span class="bnh__sub">Up to 500 USDT</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Deposit</span><span class="bn__tag">First deposit only</span>
@@ -8416,6 +8431,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                    находила именно эту карточку; «View Details» ведёт на ту же
                    акцию. Подставить сюда своё предложение — заменить текст. -->
               <article class="bncard" data-key="welcome-2" data-days="3">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-free.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Welcome<br>freespins</b><span class="bnh__sub">For new players</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Casino</span><span class="bn__tag">Active for registration</span>
@@ -8433,6 +8449,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                    находила именно эту карточку; «View Details» ведёт на ту же
                    акцию. Подставить сюда своё предложение — заменить текст. -->
               <article class="bncard" data-key="zeus-2" data-days="7">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-zeus.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Zeus<br>Fridays</b><span class="bnh__sub">Get 20 FS on Gates of Olympus</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Casino</span><span class="bn__tag">Every Friday &middot; UTC</span>
@@ -8450,6 +8467,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                    находила именно эту карточку; «View Details» ведёт на ту же
                    акцию. Подставить сюда своё предложение — заменить текст. -->
               <article class="bncard" data-key="deposit-2" data-days="30">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-ref.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">Deposit<br>bonus</b><span class="bnh__sub">Up to 500 USDT</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Deposit</span><span class="bn__tag">First deposit only</span>
@@ -8467,6 +8485,7 @@ body:not(.is-authed) [data-auth-only] { display: none !important; }
                    находила именно эту карточку; «View Details» ведёт на ту же
                    акцию. Подставить сюда своё предложение — заменить текст. -->
               <article class="bncard" data-key="unlock-2" data-days="30">
+                <div class="bncard__hero"><img class="bncard__art" src="a/of-zeus.webp" alt="" width="355" height="150"><div class="bnh__txt"><b class="bnh__title">5% Bonus<br>Unlock</b><span class="bnh__sub">From the 2nd deposit</span></div></div>
                 <div class="bncard__body">
                   <div class="bncard__tags">
                     <span class="bn__tag">Deposit</span><span class="bn__tag">From 2nd deposit</span>
